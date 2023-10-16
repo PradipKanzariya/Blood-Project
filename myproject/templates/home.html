@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+    {% block content %}
+    <head>
+        <title>My Blood</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}">
+        
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/require.css') }}">
+    
+        <style>
+            body {
+              background-image: url('static/images/My_Blood.jpeg');
+              background-repeat: no-repeat;
+              background-attachment: fixed;  
+              background-size:cover;
+            }
+        </style>
+    </head>
+    
+    <body>
+      {% if request.method != "POST" %}
+      <div class="img">
+        <center>
+          <img src="{{url_for('static', filename='images/img_1.jpg')}}" height="200px" width="200px" style="padding: 20px;"/>
+          <img src="{{url_for('static', filename='images/img_2.jpg')}}" height="200px" width="200px" style="padding: 20px;"/>
+        </center>
+      </div>
+      {% endif %}
+
+        <div>
+
+            {% if request.method == "POST" and all_donor %}
+            <h2 style="color: white;">Donor List : </h2>
+        
+            <table>
+              <tr>
+                <th style="color: white;">Donorname</th>
+                <th style="color: white;">Gender</th>
+                <th style="color: white;">Location</th>
+                <th style="color: white;">Donate Date</th>
+                <th style="color: white;">Blood Group</th>
+              </tr>
+            {% elif all_donor == [] %}
+            <center><h1 style="color: white;">No data found</h1></center>
+            {% endif %}
+        
+              {% for donor in all_donor %}
+          
+                <tr>
+          
+                  <td style="color: rgb(255, 255, 255);">
+                    {{donor.donorname}}
+                  </td>
+                  <td style="color: white;">
+                    {{donor.gender}}
+                  </td style="color: white;">
+                  <td style="color: white;">
+                    {{donor.donate_location}}
+                  </td>
+                  <td style="color: white;">
+                    {{donor.donatedate}}
+                  </td>
+                  <td style="color: white;">
+                    {{donor.blood_group}}
+                  </td>
+          
+                </tr>
+                
+              {% endfor %}
+            </table>
+        
+          </div>
+
+    </body>
+    {% endblock %}
+</html>

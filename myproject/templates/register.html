@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+{% block content %}
+
+<body>
+
+  <div class="container">
+    <center>
+      <h2>Register</h2>
+      <h4>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          <div class="notification is-danger">
+              {{ messages[0] }}. Go to <a href="{{ url_for('main.login') }}">Login Page</a>.
+          </div>
+      {% endif %}
+      {% endwith %}
+      </h4>
+    </center>
+  </div>
+
+
+
+  <div class="container">
+
+    <form class="row g-3" action="/register" method="POST">
+      <div class="col-md-4"><br>
+        <label for="firstname" class="form-label"><b>First Name : </b></label>
+        <input type="text" class="form-control" id="firstname" value="" name="firstname" placeholder="First Name"
+          required>
+          <div class="invalid-feedback">
+            You must agree before submitting.
+          </div>
+      </div>
+      <div class="col-md-4"><br>
+        <label for="lastname" class="form-label"><b>Last Name : </b></label>
+        <input type="text" class="form-control" id="lastname" value="" name="lastname" placeholder="Last Name" required>
+      </div>
+      <div class="col-md-4"><br>
+        <label for="username" class="form-label"><b>Username : </b></label>
+        <div class="input-group">
+          <span class="input-group-text" id="username"><b>@</b></span>
+          <input type="text" class="form-control" id="username" aria-describedby="inputGroupPrepend2" name="username"
+            placeholder="Username" required>
+        </div>
+      </div>
+      
+      <div class="col-md-6"><br>
+        <label for="address" class="form-label"><b>Address : </b></label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+      </div>
+
+      <div class="col-md-6"><br>
+        <label for="birthdate" class="form-label"><b>Birthdate :</b></label><br>
+        <input type="date" id="birthdate" name="birthdate" class="form-control" required>
+      </div>
+
+      <div class="col-md-6"><br>
+        <label for="mobile" class="form-label"><b>Mobile Number : </b></label>
+        <input type="text" class="form-control" id="mobile" placeholder="Enter Mobile Number"  name="mobile" required>
+      </div>
+
+      <div class="col-md-6"><br>
+        <label for="gender" class="form-label"><b>Gender : </b></label><br>
+        <select class="form-select" id="gender" name="gender" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+
+
+      <div class="col-md-6"><br>
+        <label for="email" class="form-label"><b>Email : </b></label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+      </div>
+
+      <div class="col-md-6"><br>
+        <b>Password : </b><br> <input type="password" id="password" name="password" placeholder="Password"
+          class="form-control" required>
+        <input type="checkbox" onclick="myPassword()"> Show Password
+
+        <script>
+          function myPassword() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+              x.type = "text";
+            } else {
+              x.type = "password";
+            }
+          }
+        </script>
+      </div>
+
+      <div class="col-12"><br>
+        <center>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="T&C Accepted" id="checkbox" name="checkbox" required>
+            <label class="form-check-label" for="invalidCheck2">
+              I Agree to terms and conditions.
+            </label>
+          </div>
+        </center>
+      </div>
+
+      <div class="col-12"><br>
+        <center>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </center>
+      </div>
+
+
+    </form><br>
+
+  </div>
+
+</body>
+{% endblock %}
+
+</html>
+
+<!-- <form action="/register" method="POST">
+
+      <div class="form-group">
+        <label for="fullname"><b>Fullname :</b></label>
+        <input type="text" class="form-control" id="fullname" placeholder="Enter fullname" name="fullname">
+      </div>
+      <div class="form-group">
+        <label for="mobile"><b>Mobile Number :</b></label>
+        <input type="text" class="form-control" id="mobile" placeholder="Enter Mobile number" name="mobile">
+      </div>
+      <div class="form-group">
+        <label for="address"><b>Address :</b></label>
+        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
+      </div>
+      <div class="form-group">
+        <label for="email"><b>Email :</b></label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="password"><b>Password :</b></label>
+        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+      </div>
+      <div class="form-group">
+        <label for="re_password"><b>Confirm Password :</b></label>
+        <input type="password" class="form-control" id="re_password" placeholder="Enter password again"
+          name="re_password">
+      </div>
+      <div class="form-group">
+        <label for="birthdate"><b>Birthdate :</b></label><br>
+        <input type="date" id="birthdate" name="birthdate" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="gender"><b>Gender :</b></label><br>
+        <label for="gender">Male</label>
+        <input type="radio" id="gender" name="gender" value="Male">&emsp;&emsp;&emsp;&emsp;
+        <label for="gender">Female</label>
+          <input type="radio" id="gender" name="gender" value="Female">
+      </div>
+      
+
+      <center><button type="submit" class="btn btn-primary">Submit</button></center><br>
+      
+    </form> -->

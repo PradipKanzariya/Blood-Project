@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+{% block content %}
+
+<body>
+
+  <div class="container">
+    <center>
+      <h2>Login</h2>
+    </center><br>
+    <center>
+      <h4>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="{{ url_for('main.register') }}">Register Page</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+      </h4>
+    </center><br>
+    <form action="/login" method="POST">
+
+      <center>
+        <div class="col-md-6"><br>
+          <label for="email" class="form-label"><b>Email : </b></label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+        </div>
+
+
+        <div class="col-md-6"><br>
+          <b>Password : </b><br> <input type="password" id="password" name="password" placeholder="Password"
+            class="form-control" required>
+          <input type="checkbox" onclick="myPassword()"> Show Password
+
+          <script>
+            function myPassword() {
+              var x = document.getElementById("password");
+              if (x.type === "password") {
+                x.type = "text";
+              } else {
+                x.type = "password";
+              }
+            }
+          </script>
+        </div><br>
+      </center>
+
+      <center>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </center>
+
+    </form>
+  </div>
+
+</body>
+{% endblock %}
+
+</html>
+
+<!-- <div class="form-group">
+      <label for="email"><b>Email :</b></label>
+      <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
+    </div> -->
+
+      <!-- <div class="form-group">
+      <label for="password"><b>Password :</b></label>
+      <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
+    </div> -->

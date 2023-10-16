@@ -1,0 +1,46 @@
+{% include "base.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+{% block content %}
+<body>
+{% if session["email"] %}   
+<div class="container">
+   
+    <h1 style="text-align: center;">Welcome @{{user.username}}</h1>
+    <h5>Id: {{user.id}}</h5>
+    <h5>Firstname: {{user.firstname}}</h5>
+    <h5>Lastname: {{user.lastname}}</h5>
+    <h5>Mobile: {{user.mobile}}</h5>
+    <h5>Address: {{user.address}}</h5>
+    <h5>Email: {{user.email}}</h5>
+    <!-- <h5>Password: {{user.password}}</h5> -->
+    <h5>Gender: {{user.gender}}</h5>
+    <h5>Birthdate: {{user.birthdate}}</h5>
+</div>
+
+<div class="container">
+    <center>
+    {% if donate %}
+
+        <h4>Donate Location : {{donate.donate_location}}</h4>
+        <h4>Donate Date : {{donate.donatedate}}</h4>
+        
+    {% endif%}
+    </center>
+</div>
+
+<div>
+    <center>
+        {% if donate %}
+        <p>You can not donate.</p>
+        {% else %}
+        <a href="/donate" class="btn btn-primary">I want to Donate Blood</a>
+        {% endif%}
+        <a href="/require" class="btn btn-primary">I Require Blood</a><br><br>
+    </center>
+</div>
+{% endif %}
+</body>
+{% endblock %}

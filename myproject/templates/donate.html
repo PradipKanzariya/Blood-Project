@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Blood Donate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  {% block content %}
+  <script src="static/js/donate.js"></script>
+</head>
+
+
+<body>
+
+  <div class="container">
+    
+    <h2 style="text-align: center;">Blood Donate Form</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+              <center>
+                {{ messages[0] }}. <a href="{{ url_for('main.dashboard') }}">This email has already donated.</a>.
+              </center>
+            </div>
+        {% endif %}
+        {% endwith %}
+    <h3><b>Personal Details :</b></h3>
+      <form action="/donate" method="POST">
+        <div class="form-group">
+          <label for="donorname"><b>Donor name :</b></label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone"><b>Phone Number :</b></label>
+          <input type="text" class="form-control" id="phone" placeholder="Enter Phone number" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="address"><b>Address :</b></label>
+          <input type="text" class="form-control" id="address" placeholder="Enter address" name="address" required>
+        </div>
+        <div class="form-group">
+          <label for="email"><b>Email :</b></label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="occupation"><b>Occupation :</b></label>
+          <input type="text" class="form-control" id="occupation" placeholder="Enter occupation" name="occupation" required>
+        </div>
+        <div>
+          <label for="birthdate"><b>Birthdate :</b></label><br>
+          <input type="date" id="birthdate" name="birthdate" required>
+        </div><br>
+        <div>
+          <label for="gender" class="form-label"><b>Gender : </b></label><br>
+          <select class="form-select" id="gender" name="gender" required>
+            <option selected disabled value="">Choose...</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div><br>
+
+        <h3><b>Donate Details : </b></h3>
+        <div><br>
+          <label for="donatedate"><b>1. Donatedate :</b></label><br>
+          <input type="date" id="donatedate" name="donatedate" required>
+        </div><br>
+
+        <!-- <div>
+          <label for="location"><b>2. Select location for donate :</b></label><br>
+          <b>District: </b>&emsp;<select name="district" id="district">&emsp;&emsp;&emsp;&emsp;
+            <option value="" selected="selected">Select District</option>
+          </select>
+          <br><br>
+          <b>Taluka: </b>&emsp; <select name="taluka" id="taluka">&emsp;&emsp;&emsp;&emsp;
+            <option value="" selected="selected"> Select District first</option>
+          </select>
+          <br><br>
+          <b>Place:</b>&emsp;&emsp;<select name="place" id="place">&emsp;&emsp;&emsp;&emsp;
+            <option value="" selected="selected">Select Taluka first</option>
+          </select>
+          <br><br>
+        </div> -->
+
+        <div>
+          <label for="location" class="form-label"><b>2. Location : </b></label><br>
+          <select class="form-select" id="location" name="location" required>
+            <option selected disabled value="">City</option>
+            <option>Amreli</option>
+            <option>Arvalli</option>
+            <option>Bharuch</option>
+            <option>Dahod</option>
+            <option>Botad</option>
+            <option>Dwarka</option>
+            <option>Junagadh</option>
+            <option>Somnath</option>
+            <option>Kheda</option>
+            <option>Narmada</option>
+            <option>Mehsana</option>
+            <option>Panchmahal</option>
+            <option>Sabarkantha</option>
+            <option>Porbandar</option>
+            <option>Surendranagar</option>
+            <option>Ahmedabad</option>
+            <option>Vadodara</option>
+            <option>Anand</option>
+            <option>Chhota Udaipur</option>
+            <option>Banaskantha</option>
+            <option>Gandhinagar</option>
+            <option>Bhavnagar</option>
+            <option>Dang</option>
+            <option>Kutch</option>
+            <option>Jamnagar</option>
+            <option>Morbi</option>
+            <option>Mahisagar</option>
+            <option>Patan</option>
+            <option>Navsari</option>
+            <option>Surat</option>
+            <option>Tapi</option>
+            <option>Rajkot</option>
+            <option>Valsad</option>
+          </select>
+        </div><br>
+
+        <div>
+          <label for="bloodgroup"><b>3. Bloodgroup :</b></label><br>
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="O Rh +">&emsp;
+          <label for="bloodgroup">O Rh +</label>&emsp;&emsp;&emsp;&emsp;
+          
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="O Rh -">&emsp;
+          <label for="bloodgroup">O Rh -</label><br>
+
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="A Rh +">&emsp;
+          <label for="bloodgroup">A Rh +</label>&emsp;&emsp;&emsp;&emsp;
+          
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="A Rh -">&emsp;
+          <label for="bloodgroup">A Rh -</label><br>
+
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="B Rh +">&emsp;
+          <label for="bloodgroup">B Rh +</label>&emsp;&emsp;&emsp;&emsp;
+          
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="B Rh -">&emsp;
+          <label for="bloodgroup">B Rh -</label><br>
+
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="AB Rh +">&emsp;
+          <label for="bloodgroup">AB Rh +</label>&emsp;&emsp;&emsp;&nbsp;
+          
+          <input type="radio" id="bloodgroup" name="bloodgroup" value="AB Rh -">&emsp;
+          <label for="bloodgroup">AB Rh -</label><br>
+        </div><br>
+
+        <div>
+          <label for="previouslydonated"><b>4. Have you donated previously? :</b></label><br>
+          <label for="previouslydonated">Yes:</label>
+          <input type="radio" id="previouslydonated" name="previouslydonated" value="Yes">&emsp;&emsp;&emsp;
+          <label for="previouslydonated">No:</label>
+          <input type="radio" id="previouslydonated" name="previouslydonated" value="No">
+        </div><br>
+
+        <div>
+          <label for="lasttime"><b>5. What was the last time you donated blood? :</b></label><br>
+          <input type="date" id="lasttime" name="lasttime">
+        </div><br>
+
+    <center>
+    <button type="submit" class="btn btn-primary">Submit</button><br><br>
+    </center>
+    
+    </form>
+  </div>
+
+</body>
+
+
+</html>
+{% endblock %}

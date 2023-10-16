@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/require.css') }}">
+</head>
+
+  </div><br><br>
+  <div>
+
+
+    <h2>Donor List : </h2>
+
+    <table>
+      <tr>
+        <th>Donorname</th>
+        <th>Gender</th>
+        <th>Location</th>
+        <th>Donate Date</th>
+        <th>Blood Group</th>
+      </tr>
+
+      {% for donor in all_donor %}
+      <tr>
+
+        <td>
+          {{donor.donorname}}
+        </td>
+        <td>
+          {{donor.gender}}
+        </td>
+        <td>
+          {{donor.donate_location}}
+        </td>
+        <td>
+          {{donor.donatedate}}
+        </td>
+        <td>
+          {{donor.blood_group}}
+        </td>
+
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+
+
+</body>
+
+
+</html>
+{% endblock %}
